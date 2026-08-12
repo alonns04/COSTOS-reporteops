@@ -1,0 +1,90 @@
+-- Consulta compatible con la base SQLite local reporteops.db.
+-- Mantiene la estructura de columnas usada por transformacion.py,
+-- pero mapea los nombres de la base nueva (comparacionops) a los
+-- nombres que el desarrollo espera de la base original Metrics.
+
+SELECT
+    ConjuntoLancamento AS ConjuntoLancamiento,
+    TipoLancamento AS TipoLancamiento,
+    DEBCRED AS DEBCRED,
+    NumOrdem AS NumOrdem,
+    Natureza AS Natureza,
+    ObjID_ContasDeCustoHash AS ObjID_ContasDeCusto,
+    CodSubContaHash AS CodSubConta,
+    UnidadeFisica AS UnidadFisica,
+    Qtde AS Qtde,
+    Valor AS Valor,
+    LoteHash AS Lote,
+    DescricaoHash AS Descricao,
+    SourceIDHash AS SourceID,
+    DtReferencia AS DtReferencia,
+
+    -- Datos OP
+    NULL AS Usr_Presupuesto,
+    NULL AS Usr_Tecnico,
+    NULL AS Usr_Edicion,
+    TipoLancamento AS Tipo,
+    TipoProduto AS TipoProducto,
+    DtRefCustos AS DtRefCustos,
+    TituloOPHash AS TituloOP,
+    NomeClienteHash AS NomeCliente,
+
+    -- Datos cierre
+    Situacao AS Situacion,
+    DtEncerramento AS DtEncerramento,
+    WOStatusName AS WOStatusName,
+
+    -- Datos estructura (no disponibles en la nueva base, se dejan nulos)
+    NULL AS Acabamentos,
+    NULL AS QtdPaginas,
+    NULL AS ImagensCad,
+    NULL AS Embalagem,
+    NULL AS QtdNoPacote,
+    NULL AS User3,
+    NULL AS User4,
+    NULL AS FormatoFechado,
+    NULL AS FormatoAberto,
+    usr_Liberacion AS usr_Liberacion,
+    usr_ResponsableHash AS usr_Responsable,
+    usr_FechaLib AS usr_FechaLib,
+    NULL AS usr_observacion,
+    NULL AS USR_PlanillaTecnicaP,
+    NULL AS USR_ImagenPDF,
+    NULL AS usr_RespLiberacion,
+    NULL AS usr_FechaLiberacion,
+
+    -- Datos costos
+    QtdPrevista AS QtdPrevista,
+    ValorUnitarioPrevisto AS ValorUnitarioPrevisto,
+    ValorTotalPrevisto AS ValorTotalPrevisto,
+    CustoUnitarioPrevisto AS CostoUnitarioPrevisto,
+    CustoTotalPrevisto AS CostoTotalPrevisto,
+    QtdFaturado AS QtdFaturado,
+    ValorUnitarioFaturado AS ValorUnitarioFacturado,
+    ValorTotalFaturado AS ValorTotalFacturado,
+    CustoUnitarioReal AS CostoUnitarioReal,
+    CustoTotalReal AS CostoTotalReal,
+    QtdTotalProduzida AS QtdTotalProduzida,
+
+    -- Porcentajes
+    PercCusto1 AS PercCusto1,
+    PercCusto2 AS PercCusto2,
+    PercCusto3 AS PercCusto3,
+    NULL AS PercCusto4,
+    NULL AS PercCusto5
+
+FROM comparacionops
+
+WHERE
+    Situacao = 'E'
+    AND COALESCE(WOStatusName, '') = 'Cerrada'
+    AND TipoLancamento <> 'L'
+    AND DtEncerramento >= '{fecha_inicio}'
+    AND DtEncerramento <= '{fecha_cierre}'
+    AND DEBCRED != 'C'
+
+ORDER BY
+    NumOrdem,
+    ConjuntoLancamento,
+    Tipo;
+

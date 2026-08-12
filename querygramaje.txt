@@ -1,0 +1,12 @@
+-- Consulta de gramaje compatible con la tabla gramaje de reporteops.db.
+-- Se mantiene el mismo contrato esperado por agregar_gramatura():
+-- NumOrdem, DescMaterial, Gramatura.
+
+SELECT
+    g.NumOrdem AS NumOrdem,
+    g.DescMaterialHash AS DescMaterial,
+    g.Gramatura
+FROM gramaje AS g
+WHERE
+    g.Gramatura <> 0
+    AND g.NumOrdem = '{op}'

@@ -19,7 +19,7 @@ from transformacion import transformar_df, agregar_gramatura
 
 st.set_page_config(
     page_title="Reporte OPs",
-    page_icon="📊",
+    page_icon="logo.svg",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -193,7 +193,7 @@ def main():
     )
 
     st.title(
-        "📊 Reporte OPs"
+        "Reporte OPs"
     )
 
     # ==========================================
@@ -203,7 +203,7 @@ def main():
     with st.sidebar:
 
         st.header(
-            "⚙️ Parámetros"
+            "Parámetros"
         )
 
         col1, col2 = st.columns(2)
@@ -236,7 +236,7 @@ def main():
             st.caption("Se mostrarán solo las filas donde la cantidad prevista y la cantidad real difieran.")
 
         ejecutar = st.button(
-            "🔄 Ejecutar Consulta",
+            "Ejecutar Consulta",
             use_container_width=True,
             type="primary"
         )
@@ -252,7 +252,7 @@ def main():
     ):
 
         st.error(
-            "❌ La fecha inicio "
+            "La fecha inicio "
             "debe ser menor o igual."
         )
 
@@ -272,7 +272,7 @@ def main():
         ):
 
             st.error(
-                "❌ Seleccione ambas fechas."
+                "Seleccione ambas fechas."
             )
 
             return
@@ -352,7 +352,7 @@ def main():
                     )
 
                     st.warning(
-                        "⚠️ No se encontraron registros para el rango seleccionado."
+                        "No se encontraron registros para el rango seleccionado."
                     )
 
                     return
@@ -482,7 +482,7 @@ def main():
                 log_container.empty()
 
                 st.success(
-                    f"✅ Consulta ejecutada correctamente. "
+                    f"Consulta ejecutada correctamente. "
                     f"Se recuperaron {len(df)} registros desde la query."
                 )
 
@@ -509,7 +509,7 @@ def main():
                 log_container.empty()
 
                 st.error(
-                    f"❌ Error: {str(e)}"
+                    f"Error: {str(e)}"
                 )
 
                 logging.error(

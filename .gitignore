@@ -54,11 +54,6 @@ wheels/
 *.log
 logs/
 
-# Base de datos local
-*.db
-*.sqlite
-*.sqlite3
-
 # OS específicos
 Thumbs.db
 .DS_Store
